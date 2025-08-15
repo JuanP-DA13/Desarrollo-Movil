@@ -17,9 +17,9 @@ function App() {
 
   return (
     <SafeAreaProvider>
-      <text>
+      <Text>
         Hola Mundo
-      </text>
+      </Text>
     </SafeAreaProvider>
   );
 }
