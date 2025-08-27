@@ -34,7 +34,7 @@ class App extends Component {
       (showPerfil = false),
       (approveMesagge = 'Perfil creado con Exito'),
     ];
-  }
+  };
 
   manejarCambioNombre = texto => {
     //Metodo para cambiar Nombre
@@ -48,7 +48,7 @@ class App extends Component {
   manejarCambioApellido = texto => {
     //Metodo para cambiar Apellido
     this.setState({
-      lastNamename: texto,
+      lastName: texto,
       showPerfil: false,
       approveMesagge: 'Información Actualizada',
     });
@@ -114,11 +114,11 @@ class App extends Component {
 
     return (
       <>
-        <ScrollView>
-          <View>
+        <ScrollView style={styles.container}>
+          <View style={styles.header}>
             <Image
-              source={{ uri: 'ruta de imagen' }}
-              //style = 'Se crea el style'
+              source={{ uri: 'https://cdn-icons-png.flaticon.com/512/3135/3135768.png' }}
+              style = {styles.imagen}
               resizeMode="cover"
             />
             <Text>Mi Perfil de Usuario</Text>
@@ -127,46 +127,46 @@ class App extends Component {
           </View>
 
           <View>
-            <Text>Nombre:</Text>
+            <Text style={styles.titulo}>Nombre:</Text>
             <TextInput 
               value={name}
-              onChange={manejarCambioNombre}
+              onChangeText={this.manejarCambioNombre}
               placeholder='Ingresa tu nombre'
               placeholderTextColor="#999"
             />
 
 
-            <Text>Apellido:</Text>
+            <Text style={styles.titulo}>Apellido:</Text>
             <TextInput 
-              value={lastNamename}
-              onChange={manejarCambioApellido}
+              value={lastName}
+              onChangeText={this.manejarCambioApellido}
               placeholder='Ingresa tu Apellido'
               placeholderTextColor="#999"
             />
 
 
-            <Text>Email:</Text>
+            <Text style={styles.titulo}>Email:</Text>
             <TextInput 
               value={email}
-              onChange={manejarCambioEmail}
+              onChangeText={this.manejarCambioEmail}
               placeholder='Ingresa tu Email'
               placeholderTextColor="#999"
             />
 
 
-            <Text>Telefono:</Text>
+            <Text style={styles.titulo}>Telefono:</Text>
             <TextInput 
               value={phone}
-              onChange={manejarCambioTelefono}
+              onChangeText={this.manejarCambioTelefono}
               placeholder='Ingresa tu Telefono'
               placeholderTextColor="#999"
             />
 
 
-            <Text>Descripcion:</Text>
+            <Text style={styles.titulo}>Descripcion:</Text>
             <TextInput 
               value={description}
-              onChange={manejarCambioDescripcion}
+              onChangeText={this.manejarCambioDescripcion}
               placeholder='Ingresa tu Descripción'
               placeholderTextColor="#999"
             />
@@ -188,6 +188,38 @@ class App extends Component {
       </>
     );
   }
-}
+};//Clase app
+
+const styles = StyleSheet.create({
+  container:{
+    flex:1,
+    backgroundColor:'#f5f5f5'
+  },
+
+  header:{
+    backgroundColor:'#3143abff',
+    alignItems:'center',
+    marginBottom:20,
+    padding:30
+  },
+
+  titulo:{
+    alignItems:'center',
+    marginBottom:5,
+    padding:15
+  },
+
+  imagen:{
+    width:80,
+    height:80,
+    borderRadius:30,
+    marginBottom:15,
+    borderWidth:4,
+    borderColor:'#fff',
+  },
+
+});
+
+
 
 export default App;
