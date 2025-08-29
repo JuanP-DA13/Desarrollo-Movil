@@ -29,12 +29,11 @@ class App extends Component {
       (email = ''),
       (phone = ''),
       (description = ''),
-
       //configurar campos de la clase padre
       (showPerfil = false),
       (approveMesagge = 'Perfil creado con Exito'),
     ];
-  };
+  }
 
   manejarCambioNombre = texto => {
     //Metodo para cambiar Nombre
@@ -81,6 +80,47 @@ class App extends Component {
     });
   };
 
+  guardarPerfil = () => {
+    //Metodo guardar perfil
+    const { name, 
+            lastName,
+            email, 
+            phone,
+            description } = this.state;
+
+    //Validar que los campos no esten vacios
+
+    if (!name.trim() || !lastName.trim() || !email.trim()) {
+      Alert.alert(
+        'Campos vacios', //Titulo de la Alerta
+        'Los campos nombre, apellido y email no pueden estar vacios',
+        [{ text: 'OK' }],
+      );
+      return;
+    } 
+    //Validar el correo
+    if(!email.includes('@')){
+        Alert.alert(
+          'Email invalido',
+          'Por favor ingresar un email valido'
+          [{text: 'Ok'}]
+        );
+        return;
+      }
+
+      this.setState({
+        showPerfil:true,
+        
+      })
+
+      Alert.alert(
+        'Perfil Guardado',
+        'Su perfil ha sido guardado con éxito',
+        [{text: 'Ok'}]
+      );
+
+  };
+
   limpiarFormulario = () => {
     //Metodo limpiar campos
     this.setState({
@@ -117,109 +157,127 @@ class App extends Component {
         <ScrollView style={styles.container}>
           <View style={styles.header}>
             <Image
-              source={{ uri: 'https://cdn-icons-png.flaticon.com/512/3135/3135768.png' }}
-              style = {styles.imagen}
+              source={{
+                uri: 'https://cdn-icons-png.flaticon.com/512/3135/3135768.png',
+              }}
+              style={styles.imagen}
               resizeMode="cover"
             />
             <Text>Mi Perfil de Usuario</Text>
             <Text>Mi Aplicación Demo de React</Text>
-
           </View>
 
           <View>
             <Text style={styles.titulo}>Nombre:</Text>
-            <TextInput 
+            <TextInput
+              style={styles.textField}
               value={name}
               onChangeText={this.manejarCambioNombre}
-              placeholder='Ingresa tu nombre'
+              placeholder="Ingresa tu nombre"
               placeholderTextColor="#999"
             />
-
 
             <Text style={styles.titulo}>Apellido:</Text>
-            <TextInput 
+            <TextInput
+              style={styles.textField}
               value={lastName}
               onChangeText={this.manejarCambioApellido}
-              placeholder='Ingresa tu Apellido'
+              placeholder="Ingresa tu Apellido"
               placeholderTextColor="#999"
             />
-
 
             <Text style={styles.titulo}>Email:</Text>
-            <TextInput 
+            <TextInput
+              style={styles.textField}
               value={email}
               onChangeText={this.manejarCambioEmail}
-              placeholder='Ingresa tu Email'
+              placeholder="Ingresa tu Email"
               placeholderTextColor="#999"
             />
-
 
             <Text style={styles.titulo}>Telefono:</Text>
-            <TextInput 
+            <TextInput
+              style={styles.textField}
               value={phone}
               onChangeText={this.manejarCambioTelefono}
-              placeholder='Ingresa tu Telefono'
+              placeholder="Ingresa tu Telefono"
               placeholderTextColor="#999"
             />
 
-
             <Text style={styles.titulo}>Descripcion:</Text>
-            <TextInput 
+            <TextInput
+              style={styles.textField}
               value={description}
               onChangeText={this.manejarCambioDescripcion}
-              placeholder='Ingresa tu Descripción'
+              placeholder="Ingresa tu Descripción"
               placeholderTextColor="#999"
             />
           </View>
 
           <View>
-            <Button
-              title='Guardar Perfil'
-              //onPress={}
-            />
+            <View style={styles.botones}>
+              <Button
+                style={styles.botones}
+                title="Guardar Perfil"
+                onPress={this.guardarPerfil}
+              />
+            </View>
 
-            <Button
-              title='Limpiar Campos'
-              onPress={this.limpiarFormulario}
-            />
+            <View style={styles.botones}>
+              <Button style={styles.boton1}
+                title="Limpiar Campos"
+                onPress={this.limpiarFormulario}
+              />
+            </View>
           </View>
-          
         </ScrollView>
       </>
     );
   }
-};//Clase app
+} //Clase app
 
 const styles = StyleSheet.create({
-  container:{
-    flex:1,
-    backgroundColor:'#f5f5f5'
+  container: {
+    flex: 1,
+    backgroundColor: '#f5f5f5',
   },
 
-  header:{
-    backgroundColor:'#3143abff',
-    alignItems:'center',
-    marginBottom:20,
-    padding:30
+  header: {
+    backgroundColor: '#3143abff',
+    alignItems: 'center',
+    marginBottom: 20,
+    padding: 30,
   },
 
-  titulo:{
-    alignItems:'center',
-    marginBottom:5,
-    padding:15
+  titulo: {
+    alignItems: 'center',
+    marginBottom: 5,
+    padding: 15,
   },
 
-  imagen:{
-    width:80,
-    height:80,
-    borderRadius:30,
-    marginBottom:15,
-    borderWidth:4,
-    borderColor:'#fff',
+  textField: {
+    marginBottom: 30,
+    padding: 10,
   },
 
+  botones: {
+    marginBottom: 10,
+    padding: 10,
+  },
+
+  boton1: {
+    backgroundColor: '#d21c1cff',
+    marginBottom: 10,
+    padding: 10,
+  },
+  imagen: {
+    width: 80,
+    height: 80,
+    borderRadius: 30,
+    marginBottom: 15,
+    borderWidth: 4,
+    borderColor: '#fff',
+  },
 });
-
-
 
 export default App;
